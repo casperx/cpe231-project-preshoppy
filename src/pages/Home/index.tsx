@@ -1,9 +1,10 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
 import PageContainer from 'components/PageContainer';
 import CenterHorizontalContainer from 'components/CenterHorizontalContainer';
+import { NormalLink, Button } from 'components/Standard';
+
 import TopBar from 'components/TopBar';
 
 import ManCart from './man-cart.png';
@@ -20,10 +21,10 @@ const StyledManCartImage = styled.img.attrs(
   }
 );
 const StyledManCart = StyledManCartImage`
-	height: 400px;
-	position: absolute;
-	top: 160px;
-	left: 0;
+  height: 400px;
+  position: absolute;
+  top: 160px;
+  left: 0;
 `;
 
 const StyledWomanImage = styled.img.attrs(
@@ -67,14 +68,12 @@ const StyledText = styled.header`
   }
 `;
 
-const Button = styled.div`
-  display: inline-block;
-  font-size: 24px;
-  background-color: white;
-  padding: 14px 24px;
-  border: 0;
-  border-radius: 7px;
-  box-shadow: 0px 6px 12px -4px #525252;
+const AdjustedText = styled(StyledText)`
+  margin-top: 50px;
+`;
+
+const AdjustedLink = styled(NormalLink)`
+  margin-top: 50px;
 `;
 
 const Home: React.FC = () => {
@@ -87,14 +86,14 @@ const Home: React.FC = () => {
         <StyledManCart />
         <StyledWoman />
         <CenterHorizontalContainer>
-          <StyledText style={{ 'marginTop': '50px' }}>
+          <AdjustedText>
             <p className='l1'>ทำให้ชีวิตการช็อปของคุณ</p>
             <p className='l2'><big>ง่าย</big>และ<big>ปลอดภัย</big></p>
             <p className='l3'>ด้วย <strong>PreShoppy</strong></p>
-          </StyledText>
-          <Link style={{ 'marginTop': '50px' }} to='/event'>
+          </AdjustedText>
+          <AdjustedLink to='/event'>
             <Button>ดูอีเวนท์ในสัปดาห์นี้ »</Button>
-          </Link>
+          </AdjustedLink>
         </CenterHorizontalContainer>
       </PageContainer>
     </BgHome>

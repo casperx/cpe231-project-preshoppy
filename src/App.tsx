@@ -112,12 +112,32 @@ const GlobalStyle = createGlobalStyle`
     src: url('https://fonts.gstatic.com/s/prompt/v4/-W_8XJnvUD7dzB2Ck_kIaWMu.woff2') format('woff2');
     unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
   }
+  
+  /* thai */
+  @font-face {
+    font-family: 'Pattaya';
+    font-style: normal;
+    font-weight: 400;
+    font-display: swap;
+    src: url(https://fonts.gstatic.com/s/pattaya/v6/ea8ZadcqV_zkHY-XBcOt9lZE.woff2) format('woff2');
+    unicode-range: U+0E01-0E5B, U+200C-200D, U+25CC;
+  }
+  
+  /* latin */
+  @font-face {
+    font-family: 'Pattaya';
+    font-style: normal;
+    font-weight: 400;
+    font-display: swap;
+    src: url(https://fonts.gstatic.com/s/pattaya/v6/ea8ZadcqV_zkHY-XBdet9g.woff2) format('woff2');
+    unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+  }
 
   * {
     box-sizing: border-box;
   }
   body {
-    font-family: 'Prompt', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    font-family: Prompt, 'Segoe UI', Roboto, Ubuntu, 'Open Sans', 'Helvetica Neue', sans-serif;
     min-height: 100vh;
     margin: 0;
   }
