@@ -1,18 +1,84 @@
-import React from 'react';
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Link, Switch, Route, NavLink } from 'react-router-dom';
+import Logo from 'assets/logo.svg';
 
 // Pages
+import NotFound from 'pages/NotFound';
 import Home from 'pages/Home';
+import About from 'pages/About';
 
-const AppRouter: React.FC = () => {
+const pages = [
+    { name: 'Home', path: '/', Component: Home },
+    { name: 'About', path: '/about', Component: About }
+];
+
+const NavItem = ({
+    className,
+    children,
+    href
+}: {
+    className?: string;
+    children: JSX.Element;
+    href: string;
+}) => (
+    <li className={`nav-item ${className ?? ''}`}>
+        <Link to={href} className='nav-link'>
+            {children}
+        </Link>
+    </li>
+);
+
+const AppRouter = () => {
     return (
         <Router>
-            <Switch>
-                <Route path='/' exact>
-                    <Home />
-                </Route>
-                <Route>Not found</Route>
-            </Switch>
+            <div className='page-wrapper with-navbar'>
+                <nav className='navbar'>
+                    <a href='/' className='navbar-brand'>
+                        <img src={Logo} alt='PreShoppy' />
+                    </a>
+                    {/* Desktop Nav */}
+                    <ul className='navbar-nav d-none d-md-flex'>
+                        {pages.map(({ name, path }) => (
+                            <NavLink key={path} to={path} exact component={NavItem}>
+                                {name}
+                            </NavLink>
+                        ))}
+                    </ul>
+                    {/* Mobile Nav */}
+                    <div className='navbar-content d-md-none ml-auto'>
+                        <div className='dropdown with-arrow'>
+                            <button
+                                className='btn'
+                                data-toggle='dropdown'
+                                type='button'
+                                id='navbar-mobile-dropdown'>
+                                Menu <i className='fa fa-angle-down' aria-hidden='true'></i>
+                            </button>
+                            <div
+                                className='dropdown-menu dropdown-menu-right w-200'
+                                aria-labelledby='navbar-mobile-dropdown'>
+                                {pages.map(({ name, path }) => (
+                                    <Link key={path} to={path} className='dropdown-item'>
+                                        {name}
+                                    </Link>
+                                ))}
+                            </div>
+                        </div>
+                    </div>
+                </nav>
+
+                <div className='content-wrapper'>
+                    <Switch>
+                        {pages.map(({ Component, path }) => (
+                            <Route key={path} path={path} exact>
+                                <Component />
+                            </Route>
+                        ))}
+                        <Route>
+                            <NotFound />
+                        </Route>
+                    </Switch>
+                </div>
+            </div>
         </Router>
     );
 };

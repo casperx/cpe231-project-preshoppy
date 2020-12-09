@@ -4,7 +4,7 @@ import { Button } from 'components/Standard';
 import { TopBar } from 'components/TopBar';
 import { BgHome, StyledManCart, StyledWoman, AdjustedText, AdjustedLink } from './styled';
 
-const Home: React.FC = () => {
+const OldHome: React.FC = () => {
     return (
         <BgHome>
             <PageContainer>
@@ -29,6 +29,19 @@ const Home: React.FC = () => {
                 </CenterHorizontalContainer>
             </PageContainer>
         </BgHome>
+    );
+};
+
+const Home = () => {
+    return (
+        <div className='container'>
+            <h1>This is the Homepage</h1>
+            <p>
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Consequatur inventore ut
+                corrupti error magni rerum, commodi temporibus quasi labore vel illo debitis
+                consequuntur dolore tenetur a ipsum, veniam assumenda doloremque!
+            </p>
+        </div>
     );
 };
 
