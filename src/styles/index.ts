@@ -108,6 +108,9 @@ export const GlobalStyle = createGlobalStyle`
         --lm-navbar-link-text-color-hover: white;
         --lm-navbar-link-active-text-color: white;
         --lm-navbar-link-active-text-color-hover: white;
+        --heading-font-weight: 700;
+        --content-and-card-spacing: 1rem;
+        --content-title-font-weight: 700;
     }
 
     .nav-link:hover,
