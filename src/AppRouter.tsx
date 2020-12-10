@@ -1,5 +1,6 @@
 import { BrowserRouter as Router, Link, Switch, Route, NavLink } from 'react-router-dom';
 import Logo from 'assets/logo.svg';
+import ProfileImage from 'assets/prof.jpg';
 
 // Pages
 import NotFound from 'pages/NotFound';
@@ -52,6 +53,51 @@ const AppRouter = () => {
                             ))}
                     </ul>
                     <ul className='navbar-nav d-none d-md-flex ml-auto'>
+                        {/* This is for when login แล้ว */}
+                        <li className='nav-item'>
+                            <Link
+                                to='/chat'
+                                className='nav-link'
+                                style={{ textDecoration: 'none' }}>
+                                <i className='fas fa-comment'></i>
+                            </Link>
+                        </li>
+                        <li className='nav-item'>
+                            <div className='dropdown'>
+                                <a
+                                    href='#'
+                                    data-toggle='dropdown'
+                                    id='avatar-popover-toggle'
+                                    aria-haspopup='true'
+                                    aria-expanded='false'>
+                                    <img
+                                        src={ProfileImage}
+                                        className='rounded-circle'
+                                        alt='Profile'
+                                        style={{
+                                            height: '3rem',
+                                            position: 'relative',
+                                            top: '10px'
+                                        }}
+                                    />
+                                </a>
+                                <div
+                                    className='dropdown-menu dropdown-menu-center'
+                                    aria-labelledby='avatar-popover-toggle'>
+                                    <Link to='/user/profile' className='dropdown-item'>
+                                        บัญชีของฉัน
+                                    </Link>
+                                    <Link to='/user/transactions' className='dropdown-item'>
+                                        การซื้อของฉัน
+                                    </Link>
+                                    <div className='dropdown-divider'></div>
+                                    <Link to='/logout' className='dropdown-item'>
+                                        ออกจากระบบ
+                                    </Link>
+                                </div>
+                            </div>
+                        </li>
+                        {/* This is for when ยังไม่ล็อกอิน */}
                         <li className='nav-item'>
                             <NavLink to='/register' exact component={NavItem}>
                                 สมัครสมาชิก
@@ -67,11 +113,12 @@ const AppRouter = () => {
                     <div className='navbar-content d-md-none ml-auto'>
                         <div className='dropdown'>
                             <button
-                                className='btn'
-                                data-toggle='dropdown'
+                                className='btn btn-action'
                                 type='button'
+                                data-toggle='dropdown'
                                 id='navbar-mobile-dropdown'>
-                                เมนู <i className='fa fa-angle-down' aria-hidden='true'></i>
+                                <i className='fa fa-bars' aria-hidden='true'></i>
+                                <span className='sr-only'>Toggle navbar</span>
                             </button>
                             <div
                                 className='dropdown-menu dropdown-menu-right w-200'
@@ -89,6 +136,20 @@ const AppRouter = () => {
                                 </Link>
                                 <Link to='/login' className='dropdown-item'>
                                     เข้าสู่ระบบ
+                                </Link>
+                                <div className='dropdown-divider'></div>
+                                <Link to='/user/profile' className='dropdown-item'>
+                                    แชท
+                                </Link>
+                                <Link to='/user/profile' className='dropdown-item'>
+                                    บัญชีของฉัน
+                                </Link>
+                                <Link to='/user/transactions' className='dropdown-item'>
+                                    การซื้อของฉัน
+                                </Link>
+                                <div className='dropdown-divider'></div>
+                                <Link to='/logout' className='dropdown-item'>
+                                    ออกจากระบบ
                                 </Link>
                             </div>
                         </div>
