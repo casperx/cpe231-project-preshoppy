@@ -106,6 +106,17 @@ const Profile = () => {
                                     placeholder='0812345679'
                                 />
                             </div>
+                            <div className='form-group'>
+                                <label className='w-100'>รูปภาพโพรไฟล์</label>
+                                <div className='custom-file'>
+                                    <input
+                                        type='file'
+                                        id='prof_profile'
+                                        accept='.jpg,.jpeg,.png,.bmp,.gif,.webp'
+                                    />
+                                    <label htmlFor='prof_profile'>เลือกไฟล์...</label>
+                                </div>
+                            </div>
                             <div className='form-group mb-0'>
                                 <button className='btn btn-primary ml-auto'>บันทึกข้อมูล</button>
                             </div>
