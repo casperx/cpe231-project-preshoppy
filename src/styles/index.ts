@@ -29,6 +29,20 @@ export const GlobalStyle = createGlobalStyle`
         font-display: swap;
     }
 
+    /* IBM Plex (Thai): 300R */
+    @font-face {
+        font-family: "IBM Plex Sans Thai";
+        src: url("https://cdn.jsdelivr.net/gh/IBM/plex/IBM-Plex-Sans-Thai/fonts/complete/woff2/IBMPlexSansThai-Light.woff2")
+            format("woff2"),
+            url("https://cdn.jsdelivr.net/gh/IBM/plex/IBM-Plex-Sans-Thai/fonts/complete/woff/IBMPlexSansThai-Light.woff")
+            format("woff"),
+            url("https://cdn.jsdelivr.net/gh/IBM/plex/IBM-Plex-Sans-Thai/fonts/complete/ttf/IBMPlexSansThai-Light.ttf")
+            format("truetype");
+        font-weight: 300;
+        font-style: normal;
+        font-display: swap;
+    }
+
     /* IBM Plex (Thai): 400R */
     @font-face {
         font-family: "IBM Plex Sans Thai";
@@ -114,11 +128,30 @@ export const GlobalStyle = createGlobalStyle`
         background-position: center top;
     }
 
-    a:not(.nav-link) {
+    a:not(.nav-link):not(.dropdown-item):not(.btn) {
         text-decoration: underline;
     }
 
     .content-wrapper>.container {
         min-height: calc(100vh - var(--navbar-height));
+    }
+
+    nav.navbar {
+        @media (min-width: 577px){
+            padding-left: calc((100% - var(--container-sm-max-width)) / 2);
+            padding-right: calc((100% - var(--container-sm-max-width)) / 2);
+        }
+        @media (min-width: 769px){
+            padding-left: calc((100% - var(--container-md-max-width)) / 2);
+            padding-right: calc((100% - var(--container-md-max-width)) / 2);
+        }
+        @media (min-width: 993px){
+            padding-left: calc((100% - var(--container-lg-max-width)) / 2);
+            padding-right: calc((100% - var(--container-lg-max-width)) / 2);
+        }
+        @media (min-width: 1201px){
+            padding-left: calc((100% - var(--container-xl-max-width)) / 2);
+            padding-right: calc((100% - var(--container-xl-max-width)) / 2);
+        }
     }
 `;
