@@ -5,14 +5,16 @@ import ProfileImage from 'assets/prof.jpg';
 // Pages
 import NotFound from 'pages/NotFound';
 import Home from 'pages/Home';
-import About from 'pages/About';
+import Event from 'pages/Event';
+import EventDescription from 'pages/Event/_description';
 import Register from 'pages/Register';
 import Login from 'pages/Login';
 import Profile from 'pages/User/Profile';
 
 const pages = [
     { name: 'หน้าหลัก', path: '/', Component: Home, displayed: true },
-    { name: 'อีเวนท์', path: '/about', Component: About, displayed: true },
+    { name: 'อีเวนท์', path: '/event', Component: Event, displayed: true },
+    { name: 'รายละเอียดอีเวนท์', path: '/event/:event_id', Component: EventDescription },
     { name: 'สมัครสมาชิก', path: '/register', Component: Register },
     { name: 'เข้าสู่ระบบ', path: '/login', Component: Login },
     { name: 'โปรไฟล์', path: '/user/profile', Component: Profile }
@@ -98,16 +100,12 @@ const AppRouter = () => {
                             </div>
                         </li>
                         {/* This is for when ยังไม่ล็อกอิน */}
-                        <li className='nav-item'>
-                            <NavLink to='/register' exact component={NavItem}>
-                                สมัครสมาชิก
-                            </NavLink>
-                        </li>
-                        <li className='nav-item'>
-                            <NavLink to='/login' exact component={NavItem}>
-                                เข้าสู่ระบบ
-                            </NavLink>
-                        </li>
+                        <NavLink to='/register' exact component={NavItem}>
+                            สมัครสมาชิก
+                        </NavLink>
+                        <NavLink to='/login' exact component={NavItem}>
+                            เข้าสู่ระบบ
+                        </NavLink>
                     </ul>
                     {/* Mobile Nav */}
                     <div className='navbar-content d-md-none ml-auto'>
@@ -159,9 +157,7 @@ const AppRouter = () => {
                 <div className='content-wrapper'>
                     <Switch>
                         {pages.map(({ Component, path }) => (
-                            <Route key={path} path={path} exact>
-                                <Component />
-                            </Route>
+                            <Route key={path} path={path} exact component={Component}></Route>
                         ))}
                         <Route>
                             <NotFound />

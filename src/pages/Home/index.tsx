@@ -22,7 +22,7 @@ const Home = () => {
                     <span className='l3'>
                         ด้วย <strong>PreShoppy</strong>
                     </span>
-                    <Link to='/register' className='btn btn-lg mt-15'>
+                    <Link to='/event' className='btn btn-lg mt-15'>
                         ดูอีเวนท์ในสัปดาห์นี้ »
                     </Link>
                 </AdjustedText>
