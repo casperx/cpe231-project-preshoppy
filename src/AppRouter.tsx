@@ -4,10 +4,12 @@ import Logo from 'assets/logo.svg';
 // Pages
 import NotFound from 'pages/NotFound';
 import Home from 'pages/Home';
+import Register from 'pages/Register';
 import About from 'pages/About';
 
 const pages = [
     { name: 'Home', path: '/', Component: Home },
+    { name: 'Register', path: '/register', Component: Register },
     { name: 'About', path: '/about', Component: About }
 ];
 

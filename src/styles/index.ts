@@ -72,10 +72,22 @@ export const GlobalStyle = createGlobalStyle`
     }
 
     :root {
+        /* --primary-color-very-light: #F9CF25;
+        --primary-color-light: #FBA433; */
+        --primary-color-very-light: #fc823e;
+        --primary-color-light: #fd7244;
+        --primary-color: #FE604A;
+        --primary-color-dark: #D54143;
+        --primary-color-very-dark: #A13132;
+        --primary-box-shadow-color: #fe604a4d;
+        --primary-box-shadow-color-darker: #fe604a99;
+        --card-title-font-weight: 700;
         --navbar-brand-image-height: 3rem;
         --navbar-brand-image-margin-right: 0;
         --lm-navbar-bg-image: linear-gradient(89.65deg, #D54143 0%, #FE604A 100%);
         --lm-navbar-bg-color: #FE604A;
+        --lm-button-primary-bg-image: linear-gradient(89.65deg, #FE604A 0%, #fd7244 100%);
+        --lm-button-primary-bg-image-hover: linear-gradient(89.65deg, #fd7244 0%, #fc823e 100%);
         --navbar-border-width: 0;
         --lm-navbar-box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
         --lm-navbar-link-text-color: white;
@@ -97,5 +109,12 @@ export const GlobalStyle = createGlobalStyle`
         font-family: 'IBM Plex Sans Thai', 'IBM Plex Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
         min-height: 100vh;
         margin: 0;
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-position: center top;
+    }
+
+    a:not(.nav-link) {
+        text-decoration: underline;
     }
 `;
