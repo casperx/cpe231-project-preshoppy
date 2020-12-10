@@ -4,15 +4,17 @@ import Logo from 'assets/logo.svg';
 // Pages
 import NotFound from 'pages/NotFound';
 import Home from 'pages/Home';
+import About from 'pages/About';
 import Register from 'pages/Register';
 import Login from 'pages/Login';
-import About from 'pages/About';
+import Profile from 'pages/User/Profile';
 
 const pages = [
     { name: 'หน้าหลัก', path: '/', Component: Home, displayed: true },
-    { name: 'Register', path: '/register', Component: Register },
-    { name: 'Login', path: '/login', Component: Login },
-    { name: 'อีเวนท์', path: '/about', Component: About, displayed: true }
+    { name: 'อีเวนท์', path: '/about', Component: About, displayed: true },
+    { name: 'สมัครสมาชิก', path: '/register', Component: Register },
+    { name: 'เข้าสู่ระบบ', path: '/login', Component: Login },
+    { name: 'โปรไฟล์', path: '/user/profile', Component: Profile }
 ];
 
 const NavItem = ({
@@ -57,13 +59,13 @@ const AppRouter = () => {
                         </li>
                         <li className='nav-item'>
                             <NavLink to='/login' exact component={NavItem}>
-                                ล็อกอิน
+                                เข้าสู่ระบบ
                             </NavLink>
                         </li>
                     </ul>
                     {/* Mobile Nav */}
                     <div className='navbar-content d-md-none ml-auto'>
-                        <div className='dropdown with-arrow'>
+                        <div className='dropdown'>
                             <button
                                 className='btn'
                                 data-toggle='dropdown'
