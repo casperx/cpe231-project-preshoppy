@@ -117,4 +117,8 @@ export const GlobalStyle = createGlobalStyle`
     a:not(.nav-link) {
         text-decoration: underline;
     }
+
+    .content-wrapper>.container {
+        min-height: calc(100vh - var(--navbar-height));
+    }
 `;

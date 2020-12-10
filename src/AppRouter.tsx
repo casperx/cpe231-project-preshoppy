@@ -5,11 +5,13 @@ import Logo from 'assets/logo.svg';
 import NotFound from 'pages/NotFound';
 import Home from 'pages/Home';
 import Register from 'pages/Register';
+import Login from 'pages/Login';
 import About from 'pages/About';
 
 const pages = [
     { name: 'Home', path: '/', Component: Home },
     { name: 'Register', path: '/register', Component: Register },
+    { name: 'Login', path: '/login', Component: Login },
     { name: 'About', path: '/about', Component: About }
 ];
 

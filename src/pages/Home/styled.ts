@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import { NormalLink } from 'components/Standard';
-import ManCart from 'assets/man-cart.png';
+import ManCart from 'assets/man.png';
 import Woman from 'assets/woman.png';
 
 export const BgHome = styled.div`
