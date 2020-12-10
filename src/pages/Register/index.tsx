@@ -38,7 +38,9 @@ const Register = () => {
 
     return (
         <div className='container'>
-            <div className='d-flex justify-content-center align-items-center'>
+            <div
+                className='d-flex justify-content-center align-items-center'
+                style={{ minHeight: 'calc(100vh - var(--navbar-height))' }}>
                 <div>
                     <div className='card content'>
                         <h1 className='card-title text-center'>สมัครสมาชิก</h1>
