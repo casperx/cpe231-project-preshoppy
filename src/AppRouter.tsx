@@ -9,10 +9,10 @@ import Login from 'pages/Login';
 import About from 'pages/About';
 
 const pages = [
-    { name: 'Home', path: '/', Component: Home },
+    { name: 'หน้าหลัก', path: '/', Component: Home, displayed: true },
     { name: 'Register', path: '/register', Component: Register },
     { name: 'Login', path: '/login', Component: Login },
-    { name: 'About', path: '/about', Component: About }
+    { name: 'อีเวนท์', path: '/about', Component: About, displayed: true }
 ];
 
 const NavItem = ({
@@ -41,11 +41,25 @@ const AppRouter = () => {
                     </a>
                     {/* Desktop Nav */}
                     <ul className='navbar-nav d-none d-md-flex'>
-                        {pages.map(({ name, path }) => (
-                            <NavLink key={path} to={path} exact component={NavItem}>
-                                {name}
+                        {pages
+                            .filter((e) => e.displayed)
+                            .map(({ name, path }) => (
+                                <NavLink key={path} to={path} exact component={NavItem}>
+                                    {name}
+                                </NavLink>
+                            ))}
+                    </ul>
+                    <ul className='navbar-nav d-none d-md-flex ml-auto'>
+                        <li className='nav-item'>
+                            <NavLink to='/register' exact component={NavItem}>
+                                สมัครสมาชิก
                             </NavLink>
-                        ))}
+                        </li>
+                        <li className='nav-item'>
+                            <NavLink to='/login' exact component={NavItem}>
+                                ล็อกอิน
+                            </NavLink>
+                        </li>
                     </ul>
                     {/* Mobile Nav */}
                     <div className='navbar-content d-md-none ml-auto'>
@@ -55,16 +69,25 @@ const AppRouter = () => {
                                 data-toggle='dropdown'
                                 type='button'
                                 id='navbar-mobile-dropdown'>
-                                Menu <i className='fa fa-angle-down' aria-hidden='true'></i>
+                                เมนู <i className='fa fa-angle-down' aria-hidden='true'></i>
                             </button>
                             <div
                                 className='dropdown-menu dropdown-menu-right w-200'
                                 aria-labelledby='navbar-mobile-dropdown'>
-                                {pages.map(({ name, path }) => (
-                                    <Link key={path} to={path} className='dropdown-item'>
-                                        {name}
-                                    </Link>
-                                ))}
+                                {pages
+                                    .filter((e) => e.displayed)
+                                    .map(({ name, path }) => (
+                                        <Link key={path} to={path} className='dropdown-item'>
+                                            {name}
+                                        </Link>
+                                    ))}
+                                <div className='dropdown-divider'></div>
+                                <Link to='/register' className='dropdown-item'>
+                                    สมัครสมาชิก
+                                </Link>
+                                <Link to='/login' className='dropdown-item'>
+                                    เข้าสู่ระบบ
+                                </Link>
                             </div>
                         </div>
                     </div>

@@ -4,7 +4,7 @@ const halfmoon = require('halfmoon');
 import { GlobalStyle } from 'styles/index';
 import AppRouter from './AppRouter';
 
-const App: React.FC = () => {
+const App = () => {
     useEffect(() => halfmoon.onDOMContentLoaded(), []);
 
     return (
