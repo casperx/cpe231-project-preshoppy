@@ -15,6 +15,7 @@ import AdminDashboard from 'pages/Admin/Dashboard';
 import AdminCreateEvent from 'pages/Admin/Dashboard/create_event';
 import AdminEditEvent from 'pages/Admin/Dashboard/edit_event';
 import Chat from 'pages/Chat';
+import Pay from 'pages/Order';
 import { useEffect, useState } from 'react';
 
 const pages = [
@@ -28,7 +29,8 @@ const pages = [
     { name: 'หลังบ้าน', path: '/admin/dashboard', Component: AdminDashboard },
     { name: 'เพิ่มอีเวนท์', path: '/admin/dashboard/event/add', Component: AdminCreateEvent },
     { name: 'แก้อีเวนท์', path: '/admin/dashboard/event/edit/:id', Component: AdminEditEvent },
-    { name: 'แชท', path: '/chat', Component: Chat }
+    { name: 'แชท', path: '/chat', Component: Chat },
+    { name: 'จ่ายเงิน', path: '/order/:order_id', Component: Pay }
 ];
 
 const NavItem = ({

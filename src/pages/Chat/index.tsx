@@ -1,4 +1,6 @@
 import { ChangeEvent, useState } from 'react';
+import LOLImage from 'assets/prof3.jpg';
+import GameImage from 'assets/prof2.jpg';
 import ProfImage from 'assets/prof.jpg';
 import ReactModal from 'react-modal';
 import Swal from 'sweetalert2';
@@ -8,6 +10,17 @@ interface OrderItem {
     quantity: number;
     price: number;
 }
+
+const ChatLog = [
+    { image: GameImage, name: 'Thapanon Sodngam', msg: 'ต้องการสินค้าตัวไหนครับ' },
+    { image: ProfImage, name: 'Suthep Chanchuphol', msg: 'เอาหนังสือชื่อ Bitcoin101' },
+    { image: GameImage, name: 'Thapanon Sodngam', msg: 'ราคาหนังสือ 117 นะครับ' },
+    { image: ProfImage, name: 'Suthep Chanchuphol', msg: 'OK ครับ' },
+    { image: GameImage, name: 'Thapanon Sodngam', msg: 'จัดส่งรูปแบบไหนครับ' },
+    { image: ProfImage, name: 'Suthep Chanchuphol', msg: 'FlashExpress ครับ' },
+    { image: GameImage, name: 'Thapanon Sodngam', msg: 'ค่าจัดส่ง 35 บาทครับ' },
+    { image: ProfImage, name: 'Suthep Chanchuphol', msg: 'ครับ' }
+];
 
 const Chat = () => {
     const [isModalOpen, setIsModalOpen] = useState(false);
@@ -92,10 +105,16 @@ const Chat = () => {
                                     borderRight: 0
                                 }}>
                                 <a href='#' className='dropdown-item'>
-                                    บัญชีของฉัน
+                                    <figure className='avatar mr-10'>
+                                        <img src={GameImage} alt='Avatar' />
+                                    </figure>
+                                    Thapanon Sodngam
                                 </a>
                                 <a href='#' className='dropdown-item'>
-                                    การซื้อของฉัน
+                                    <figure className='avatar mr-10'>
+                                        <img src={LOLImage} alt='Avatar' />
+                                    </figure>
+                                    ขำกร๊าก ขำไปไหน
                                 </a>
                             </div>
                         </div>
@@ -110,77 +129,43 @@ const Chat = () => {
                                             position: 'relative',
                                             top: '-4px'
                                         }}>
-                                        <img src={ProfImage} alt='Avatar' />
+                                        <img src={GameImage} alt='Avatar' />
                                     </figure>
-                                    <span>ABC DEF</span>
+                                    <span>Thapanon Sodngam</span>
                                 </h2>
                             </div>
                             <div className='panel-body'>
+                                {ChatLog.map((chat) => (
+                                    <div className='tile'>
+                                        <div className='tile-icon'>
+                                            <figure className='avatar'>
+                                                <img src={chat.image} alt='Avatar' />
+                                            </figure>
+                                        </div>
+                                        <div className='tile-content'>
+                                            <p className='tile-title text-bold'>{chat.name}</p>
+                                            <p className='tile-subtitle'>{chat.msg}</p>
+                                        </div>
+                                    </div>
+                                ))}
                                 <div className='tile'>
                                     <div className='tile-icon'>
                                         <figure className='avatar'>
-                                            <img src={ProfImage} alt='Avatar' />
+                                            <img src={GameImage} alt='Avatar' />
                                         </figure>
                                     </div>
                                     <div className='tile-content'>
-                                        <p className='tile-title text-bold'>Thor Odinson</p>
+                                        <p className='tile-title text-bold'>Thapanon Sodngam</p>
                                         <p className='tile-subtitle'>
-                                            Earth's Mightiest Heroes joined forces to take on
-                                            threats that were too big for any one hero to tackle...
-                                        </p>
-                                    </div>
-                                </div>
-                                <div className='tile'>
-                                    <div className='tile-icon'>
-                                        <figure className='avatar'>
-                                            <img src={ProfImage} alt='Avatar' />
-                                        </figure>
-                                    </div>
-                                    <div className='tile-content'>
-                                        <p className='tile-title text-bold'>Bruce Banner</p>
-                                        <p className='tile-subtitle'>
-                                            The Strategic Homeland Intervention, Enforcement, and
-                                            Logistics Division...
-                                        </p>
-                                    </div>
-                                </div>
-                                <div className='tile'>
-                                    <div className='tile-icon'>
-                                        <figure className='avatar' data-initial='TS'></figure>
-                                    </div>
-                                    <div className='tile-content'>
-                                        <p className='tile-title text-bold'>Tony Stark</p>
-                                        <p className='tile-subtitle'>
-                                            Earth's Mightiest Heroes joined forces to take on
-                                            threats that were too big for any one hero to tackle...
-                                        </p>
-                                    </div>
-                                </div>
-                                <div className='tile'>
-                                    <div className='tile-icon'>
-                                        <figure className='avatar'>
-                                            <img src={ProfImage} alt='Avatar' />
-                                        </figure>
-                                    </div>
-                                    <div className='tile-content'>
-                                        <p className='tile-title text-bold'>Steve Rogers</p>
-                                        <p className='tile-subtitle'>
-                                            The Strategic Homeland Intervention, Enforcement, and
-                                            Logistics Division...
-                                        </p>
-                                    </div>
-                                </div>
-                                <div className='tile'>
-                                    <div className='tile-icon'>
-                                        <figure className='avatar'>
-                                            <img src={ProfImage} alt='Avatar' />
-                                        </figure>
-                                    </div>
-                                    <div className='tile-content'>
-                                        <p className='tile-title text-bold'>Natasha Romanoff</p>
-                                        <p className='tile-subtitle'>
-                                            Earth's Mightiest Heroes joined forces to take on
-                                            threats that were too big for any one hero to tackle...
+                                            <button
+                                                className='btn btn-primary py-5'
+                                                style={{ height: 'auto', lineHeight: '1.5' }}>
+                                                <div>ยอดชำระทั้งหมด</div>
+                                                <h3 className='m-0'>152฿</h3>
+                                                <button className='btn btn-sm btn-secondary btn-block'>
+                                                    ดูรายละเอียด
+                                                </button>
+                                            </button>
                                         </p>
                                     </div>
                                 </div>
