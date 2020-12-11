@@ -23,7 +23,7 @@ const pages = [
     { name: 'ล็อกอินหลังบ้าน', path: '/admin', Component: Admin },
     { name: 'หลังบ้าน', path: '/admin/dashboard', Component: AdminDashboard },
     { name: 'เพิ่มอีเวนท์', path: '/admin/dashboard/event/add', Component: AdminCreateEvent },
-    { name: 'แก้อีเวนท์', path: '/admin/dashboard/event/edit/:id', Component: AdminEditEvent },
+    { name: 'แก้อีเวนท์', path: '/admin/dashboard/event/edit/:id', Component: AdminEditEvent }
 ];
 
 const NavItem = ({
