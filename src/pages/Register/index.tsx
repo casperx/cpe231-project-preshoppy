@@ -1,5 +1,7 @@
-import { useState, ChangeEvent, useEffect, useMemo } from 'react';
+import { useState, ChangeEvent, FormEvent, useEffect, useMemo } from 'react';
+import { useHistory } from 'react-router-dom';
 import PasswordStrengthBar from 'react-password-strength-bar';
+import API from 'API';
 import BackgroundImage from 'assets/bg.jpg';
 import WomanImage from 'assets/woman.png';
 
@@ -15,6 +17,13 @@ const passwordCheckerWords = {
 };
 
 const Register = () => {
+    const history = useHistory();
+
+    const [email, setEmail] = useState('');
+    const emailHandler = (e: ChangeEvent<HTMLInputElement>) => {
+        setEmail(e.target.value);
+    };
+
     const [password, setPassword] = useState('');
     const passwordHandler = (e: ChangeEvent<HTMLInputElement>) => {
         setPassword(e.target.value);
@@ -36,6 +45,20 @@ const Register = () => {
         return () => void (document.body.style.backgroundImage = '');
     }, []);
 
+    const formHandler = (e: FormEvent) => {
+        e.preventDefault();
+        API.post('/auth/create', {
+            email,
+            password
+        })
+            .then(() => {
+                history.push('/login');
+            })
+            .catch((e) => {
+                console.log(e);
+            });
+    };
+
     return (
         <div className='container'>
             <div
@@ -44,7 +67,7 @@ const Register = () => {
                 <div>
                     <div className='card content'>
                         <h1 className='card-title text-center'>สมัครสมาชิก</h1>
-                        <form action='#' method='POST'>
+                        <form action='#' method='POST' onSubmit={formHandler}>
                             <div className='form-group'>
                                 <label htmlFor='regis_email' className='required'>
                                     อีเมล
@@ -55,6 +78,7 @@ const Register = () => {
                                     id='regis_email'
                                     placeholder='happy@preshoppy.in.th'
                                     required
+                                    onChange={emailHandler}
                                 />
                             </div>
                             <div className='form-group'>

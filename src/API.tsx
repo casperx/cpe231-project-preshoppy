@@ -1,13 +1,19 @@
 import axios from 'axios';
 
+export const baseURL = process.env.BACKEND_URL ?? 'http://localhost:3000';
+
 const client = axios.create({
-    baseURL: 'https://afternoon-cove-79461.herokuapp.com/api'
+    baseURL: `${baseURL}/api`
 });
 
-const Event = {
-    getAll() {
-        return client.get('/Events/getEvents');
-    }
-};
+export interface EventDetail {
+    id: number;
+    name: string;
+    detail: string;
+    startDateTime: string;
+    endDateTime: string;
+    location: string;
+    eventPic: string;
+}
 
-export { Event };
+export default client;
