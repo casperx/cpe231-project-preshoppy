@@ -1,6 +1,7 @@
+import { useMemo, useState } from 'react';
 import { Editor, EditorState, RichUtils, DraftEditorCommand } from 'draft-js';
 import 'draft-js/dist/Draft.css';
-import { useState } from 'react';
+import { stateToHTML } from 'draft-js-export-html';
 
 const EditEvent = () => {
     const [editorState, setEditorState] = useState(() => EditorState.createEmpty());
@@ -18,6 +19,11 @@ const EditEvent = () => {
     const editorButtonClick = (type: string) => {
         editorChange(RichUtils.toggleInlineStyle(editorState, type));
     };
+
+    // Event content
+    const event_contents = useMemo(() => stateToHTML(editorState.getCurrentContent()), [
+        editorState
+    ]);
 
     return (
         <div className='container'>
