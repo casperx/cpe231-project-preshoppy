@@ -5,8 +5,10 @@ import { stateToHTML } from 'draft-js-export-html';
 import { stateFromHTML } from 'draft-js-import-html';
 import API, { EventDetail } from 'API';
 import Swal from 'sweetalert2';
+import { useHistory } from 'react-router-dom';
 
-const EditEvent = (props: any) => {
+const CreateEvent = () => {
+    const history = useHistory();
     const [editorState, setEditorState] = useState(() => EditorState.createEmpty());
     const [detailChange, setDetailChange] = useState(false);
     const editorChange = (editorState: EditorState) => {
@@ -27,69 +29,46 @@ const EditEvent = (props: any) => {
         editorChange(RichUtils.toggleInlineStyle(editorState, type));
     };
 
-    const eventId = props.match.params.id;
-
     const [name, setName] = useState('');
-    const [nameChange, setNameChange] = useState(false);
-    const nameHandler = (e: ChangeEvent<HTMLInputElement>) => {
-        setName(e.target.value);
-        setNameChange(true);
-    };
+    const nameHandler = (e: ChangeEvent<HTMLInputElement>) => void setName(e.target.value);
 
     const [location, setLocation] = useState('');
-    const [locationChange, setLocationChange] = useState(false);
-    const locationHandler = (e: ChangeEvent<HTMLInputElement>) => {
-        setLocation(e.target.value);
-        setLocationChange(true);
-    };
+    const locationHandler = (e: ChangeEvent<HTMLInputElement>) => void setLocation(e.target.value);
 
     const [startDateTime, setStartDateTime] = useState('');
-    const [startDateTimeChange, setStartDateTimeChange] = useState(false);
-    const startDateTimeHandler = (e: ChangeEvent<HTMLInputElement>) => {
-        setStartDateTime(e.target.value);
-        setStartDateTimeChange(true);
-    };
+    const startDateTimeHandler = (e: ChangeEvent<HTMLInputElement>) =>
+        void setStartDateTime(e.target.value);
 
     const [endDateTime, setEndDateTime] = useState('');
-    const [endDateTimeChange, setEndDateTimeChange] = useState(false);
-    const endDateTimeHandler = (e: ChangeEvent<HTMLInputElement>) => {
-        setEndDateTime(e.target.value);
-        setEndDateTimeChange(true);
-    };
+    const endDateTimeHandler = (e: ChangeEvent<HTMLInputElement>) =>
+        void setEndDateTime(e.target.value);
 
     const [eventPic, setEventPic] = useState<File | undefined>();
     const eventPicHandler = (e: ChangeEvent<HTMLInputElement>) =>
         void setEventPic(e.target.files?.[0]);
 
-    useEffect(() => {
-        API.get(`/event/get/${eventId}`).then((res) => {
-            const data = res.data as EventDetail;
-            setName(data.name);
-            setEditorState(EditorState.createWithContent(stateFromHTML(data.detail)));
-            setStartDateTime(data.startDateTime.split('T')[0]);
-            setEndDateTime(data.endDateTime.split('T')[0]);
-            setLocation(data.location);
-        });
-    }, []);
-
     const formHandler = (e: any) => {
         e.preventDefault();
 
         const data = new FormData();
-        if (nameChange) data.append('name', name);
-        if (detailChange) data.append('detail', event_contents);
-        if (startDateTimeChange) data.append('startDateTime', startDateTime);
-        if (endDateTimeChange) data.append('endDateTime', endDateTime);
-        if (locationChange) data.append('location', location);
-        if (eventPic !== undefined) data.append('eventPic', eventPic);
-        API.post(`/event/edit/${eventId}`, data, {
+
+        data.append('name', name);
+        data.append('detail', event_contents);
+        data.append('startDateTime', startDateTime);
+        data.append('endDateTime', endDateTime);
+        data.append('location', location);
+        data.append('contact', '0102002');
+
+        if (eventPic) data.append('eventPic', eventPic);
+
+        API.post(`/event/add`, data, {
             headers: {
                 'Content-Type': 'multipart/form-data'
             }
         })
             .then((res) => {
-                Swal.fire('แก้ไขสำเร็จ', 'ข้อมูลของท่านถูกแก้ไขแล้ว', 'success').then(() =>
-                    window.location.reload()
+                Swal.fire('เพิ่มสำเร็จ', 'ข้อมูลของท่านถูกเพิ่มแล้ว', 'success').then(() =>
+                    history.push('/admin/dashboard')
                 );
             })
             .catch((e) => {
@@ -104,7 +83,7 @@ const EditEvent = (props: any) => {
 
     return (
         <div className='container'>
-            <h1>แก้ไขอีเวนท์</h1>
+            <h1>เพิ่มอีเวนท์</h1>
             <div className='card'>
                 <div className='form-group'>
                     <label htmlFor='event_name' className='required'>
@@ -214,4 +193,4 @@ const EditEvent = (props: any) => {
     );
 };
 
-export default EditEvent;
+export default CreateEvent;

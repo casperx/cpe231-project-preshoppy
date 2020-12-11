@@ -83,7 +83,10 @@ const Event = () => {
                     <div className='col mr-5'>
                         <h2 className='mb-0 mt-5'>{eventList[currentEvent]?.name}</h2>
                         <hr />
-                        <p>{eventList[currentEvent]?.detail}</p>
+                        <p
+                            dangerouslySetInnerHTML={{
+                                __html: eventList[currentEvent]?.detail
+                            }}></p>
                         <div className='row'>
                             <div className='col mr-5'>
                                 <button

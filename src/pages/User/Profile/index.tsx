@@ -45,7 +45,7 @@ const Profile = () => {
 
     const [profilePic, setProfilePic] = useState<File | undefined>(undefined);
     const profilePicHandler = (e: ChangeEvent<HTMLInputElement>) =>
-        void setProfilePic(e.target?.files?.[0]);
+        void setProfilePic(e.target.files?.[0]);
 
     const [password, setPassword] = useState('');
     const [passwordChange, setPasswordChange] = useState(false);
