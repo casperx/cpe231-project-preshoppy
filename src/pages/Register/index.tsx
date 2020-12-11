@@ -2,8 +2,8 @@ import { useState, ChangeEvent, FormEvent, useEffect, useMemo } from 'react';
 import { useHistory } from 'react-router-dom';
 import PasswordStrengthBar from 'react-password-strength-bar';
 import API from 'API';
-import BackgroundImage from 'assets/bg.jpg';
 import WomanImage from 'assets/woman.png';
+import { hideBackground, showBackground } from 'helpers/background';
 
 const passwordCheckerWords = {
     scoreWords: [
@@ -41,8 +41,8 @@ const Register = () => {
     }, [password, confirmPassword]);
 
     useEffect(() => {
-        document.body.style.backgroundImage = `url(${BackgroundImage})`;
-        return () => void (document.body.style.backgroundImage = '');
+        showBackground();
+        return () => hideBackground();
     }, []);
 
     const formHandler = (e: FormEvent) => {

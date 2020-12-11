@@ -1,13 +1,13 @@
 import { ChangeEvent, FormEvent, useEffect, useState } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 import API from 'API';
-import BackgroundImage from 'assets/bg.jpg';
 import ManImage from 'assets/man.png';
+import { hideBackground, showBackground } from 'helpers/background';
 
 const Login = () => {
     useEffect(() => {
-        document.body.style.backgroundImage = `url(${BackgroundImage})`;
-        return () => void (document.body.style.backgroundImage = '');
+        showBackground();
+        return () => hideBackground();
     }, []);
 
     const history = useHistory();

@@ -1,12 +1,12 @@
 import { useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import BackgroundImage from 'assets/bg.jpg';
+import { hideBackground, showBackground } from 'helpers/background';
 import { StyledManCart, StyledWoman, AdjustedText } from './styled';
 
 const Home = () => {
     useEffect(() => {
-        document.body.style.backgroundImage = `url(${BackgroundImage})`;
-        return () => void (document.body.style.backgroundImage = '');
+        showBackground();
+        return () => hideBackground();
     }, []);
 
     return (

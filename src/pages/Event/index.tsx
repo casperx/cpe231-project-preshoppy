@@ -39,9 +39,11 @@ const Event = () => {
 
     const [eventList, setEventList] = useState<EventDetail[]>([]);
     useEffect(() => {
-        API.get('/event/list').then(({ data }: { data: EventDetail[] }) => {
-            setEventList(data);
-        });
+        API.get('/event/list')
+            .then(({ data }: { data: EventDetail[] }) => {
+                setEventList(data);
+            })
+            .catch((_e) => setEventList([]));
     }, []);
 
     return (
@@ -50,7 +52,7 @@ const Event = () => {
                 <i className='fas fa-calendar-day'></i> อีเวนท์ในสัปดาห์นี้
             </h1>
             <div className='row'>
-                {eventList.map((props: any) => (
+                {eventList.map((props: any, event_index: number) => (
                     <div className='col-6 col-md-4 col-lg-3' key={props.id}>
                         <EventCard
                             posterImage={`${APIBaseURL}/upload/event_pic/${props.eventPic}`}
@@ -58,7 +60,7 @@ const Event = () => {
                             desc={props.detail}
                             location={props.location}
                             date={convertDateTime(props)}
-                            onClick={() => getEventData(props.id)}
+                            onClick={() => getEventData(event_index)}
                         />
                     </div>
                 ))}
@@ -79,9 +81,9 @@ const Event = () => {
                 ariaHideApp={false}>
                 <div className='row'>
                     <div className='col mr-5'>
-                        <h2 className='mb-0 mt-5'>{eventList[currentEvent].name}</h2>
+                        <h2 className='mb-0 mt-5'>{eventList[currentEvent]?.name}</h2>
                         <hr />
-                        <p>{eventList[currentEvent].detail}</p>
+                        <p>{eventList[currentEvent]?.detail}</p>
                         <div className='row'>
                             <div className='col mr-5'>
                                 <button
@@ -121,19 +123,24 @@ const Event = () => {
                     </div>
                     <div className='col-3 ml-5'>
                         <img
-                            src={`${APIBaseURL}/upload/event_pic/${eventList[currentEvent].eventPic}`}
-                            alt={eventList[currentEvent].name}
+                            src={`${APIBaseURL}/upload/event_pic/${eventList[currentEvent]?.eventPic}`}
+                            alt={eventList[currentEvent]?.name}
                             className='img-fluid'
                         />
                         <div className='d-flex'>
                             <i className='fas fa-calendar mr-5'></i>
                             <div className='text-truncate'>
-                                {convertDateTime(eventList[currentEvent])}
+                                {convertDateTime(
+                                    eventList[currentEvent] || {
+                                        startDateTime: new Date().toString(),
+                                        endDateTime: new Date().toString()
+                                    }
+                                )}
                             </div>
                         </div>
                         <div className='d-flex'>
                             <i className='fas fa-map-marker-alt mr-5'></i>
-                            <div className='text-truncate'>{eventList[currentEvent].location}</div>
+                            <div className='text-truncate'>{eventList[currentEvent]?.location}</div>
                         </div>
                         <div className='mt-10'>
                             <button
