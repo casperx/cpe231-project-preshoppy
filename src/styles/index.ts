@@ -263,4 +263,10 @@ export const GlobalStyle = createGlobalStyle`
         width: 100%;
         z-index: 1;
     }
+    .swal2-styled.swal2-confirm.btn:not(.btn-primary) {
+        color: #000;
+    }
+    .swal2-styled.swal2-cancel.btn:not(.btn-primary) {
+        color: #000
+    }
 `;
