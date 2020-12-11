@@ -1,6 +1,8 @@
-import { useState, ChangeEvent, useEffect, useMemo } from 'react';
+import { useState, ChangeEvent, useEffect, useMemo, FormEvent } from 'react';
+import API, { baseURL as APIBaseURL, UserDetail } from 'API';
 import PasswordStrengthBar from 'react-password-strength-bar';
 import ProfileImage from 'assets/prof.jpg';
+import { formatWithCursor } from 'prettier';
 
 const passwordCheckerWords = {
     scoreWords: [
@@ -14,9 +16,43 @@ const passwordCheckerWords = {
 };
 
 const Profile = () => {
+    const [email, setEmail] = useState('');
+    const [emailChange, setEmailChange] = useState(false);
+    const emailHandler = (e: ChangeEvent<HTMLInputElement>) => {
+        setEmail(e.target.value);
+        setEmailChange(true);
+    };
+
+    const [firstName, setFirstName] = useState('');
+    const [firstNameChange, setFirstNameChange] = useState(false);
+    const firstNameHandler = (e: ChangeEvent<HTMLInputElement>) => {
+        setFirstName(e.target.value);
+        setFirstNameChange(true);
+    };
+
+    const [lastName, setLastName] = useState('');
+    const [lastNameChange, setLastNameChange] = useState(false);
+    const lastNameHandler = (e: ChangeEvent<HTMLInputElement>) => {
+        setLastName(e.target.value);
+        setLastNameChange(true);
+    };
+
+    const [tel, setTel] = useState('');
+    const [telChange, setTelChange] = useState(false);
+    const telHandler = (e: ChangeEvent<HTMLInputElement>) => {
+        setTel(e.target.value);
+        setTelChange(true);
+    };
+
+    const [profilePic, setProfilePic] = useState<File | undefined>(undefined);
+    const profilePicHandler = (e: ChangeEvent<HTMLInputElement>) =>
+        void setProfilePic(e.target?.files?.[0]);
+
     const [password, setPassword] = useState('');
+    const [passwordChange, setPasswordChange] = useState(false);
     const passwordHandler = (e: ChangeEvent<HTMLInputElement>) => {
         setPassword(e.target.value);
+        setPasswordChange(true);
     };
 
     const [confirmPassword, setConfirmPassword] = useState('');
@@ -29,6 +65,39 @@ const Profile = () => {
         if (password !== confirmPassword) return 'รหัสผ่านไม่ตรงกัน 😮';
         return 'รหัสผ่านตรงกัน 😎';
     }, [password, confirmPassword]);
+
+    useEffect(() => {
+        API.get('/user/info/1').then((res) => {
+            const detail = res.data as UserDetail;
+            setEmail(detail.email);
+            setFirstName(detail.firstName);
+            setLastName(detail.lastName);
+            setTel(detail.tel);
+        });
+    }, []);
+
+    const formHandler = (e: FormEvent<HTMLFormElement>) => {
+        e.preventDefault();
+
+        const data = new FormData();
+        if (emailChange) data.append('email', email);
+        if (passwordChange) data.append('password', password);
+        if (firstNameChange) data.append('firstName', firstName);
+        if (lastNameChange) data.append('lastName', lastName);
+        if (telChange) data.append('tel', tel);
+        if (profilePic !== undefined) data.append('profilePic', profilePic);
+        API.post('/user/edit/1', data, {
+            headers: {
+                'Content-Type': 'multipart/form-data'
+            }
+        })
+            .then((res) => {
+                alert('OK');
+            })
+            .catch((e) => {
+                alert('Something went wrong');
+            });
+    };
 
     return (
         <div className='container'>
@@ -60,7 +129,7 @@ const Profile = () => {
                 <div className='col-12 col-md'>
                     <div className='card'>
                         <h1 className='card-title'>ข้อมูลส่วนตัว</h1>
-                        <form action='#' className='form-inline'>
+                        <form action='#' className='form-inline' onSubmit={formHandler}>
                             <div className='form-group'>
                                 <label htmlFor='prof_firstname' className='w-100'>
                                     ชื่อจริง
@@ -70,6 +139,8 @@ const Profile = () => {
                                     className='form-control'
                                     id='prof_firstname'
                                     placeholder='แฮปปี้'
+                                    onChange={firstNameHandler}
+                                    value={firstName}
                                 />
                             </div>
                             <div className='form-group'>
@@ -81,6 +152,8 @@ const Profile = () => {
                                     className='form-control'
                                     id='prof_lastname'
                                     placeholder='พรีชอปปี้'
+                                    onChange={lastNameHandler}
+                                    value={lastName}
                                 />
                             </div>
                             <div className='form-group'>
@@ -93,6 +166,8 @@ const Profile = () => {
                                     id='prof_email'
                                     placeholder='happy@preshoppy.in.th'
                                     required
+                                    onChange={emailHandler}
+                                    value={email}
                                 />
                             </div>
                             <div className='form-group'>
@@ -104,6 +179,8 @@ const Profile = () => {
                                     className='form-control'
                                     id='prof_tel'
                                     placeholder='0812345679'
+                                    onChange={telHandler}
+                                    value={tel}
                                 />
                             </div>
                             <div className='form-group'>
@@ -113,6 +190,7 @@ const Profile = () => {
                                         type='file'
                                         id='prof_profile'
                                         accept='.jpg,.jpeg,.png,.bmp,.gif,.webp'
+                                        onChange={profilePicHandler}
                                     />
                                     <label htmlFor='prof_profile'>เลือกไฟล์...</label>
                                 </div>
