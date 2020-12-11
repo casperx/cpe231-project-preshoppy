@@ -39,7 +39,33 @@ const Order = () => {
                         </div>
                     </div>
                 </div>
-                <div className='col-12 col-md'>LOL</div>
+                <div className='col-12 col-md'>
+                    <div className='card'>
+                        <div className='row'>
+                            <div className='col'>
+                                <h2 className='m-0'>Order ID: #231726817648971</h2>
+                            </div>
+                            <div className='col-auto'>
+                                <h2 className='m-0 text-primary'>999฿</h2>
+                            </div>
+                        </div>
+                        <p>
+                            <b>สถานะ:</b> รอบันทึกเลขพัสดุ
+                        </p>
+                        <p>ตรงนี้ใส่ว่าซื้ออะไรไปบ้างแบบคร่าวๆ</p>
+                        <hr />
+                        <div className='text-right'>
+                            <Link to='/order/---ใส่เลข_id---' className='btn mr-5'>
+                                ชำระเงิน
+                            </Link>
+                            <button className='btn mr-5'>บันทึกเลขพัสดุ</button>
+                            <Link to='/chat' className='btn mr-5'>
+                                แชทกับผู้ขาย
+                            </Link>
+                            <button className='btn'>ดูข้อมูล</button>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     );
