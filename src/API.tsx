@@ -16,4 +16,13 @@ export interface EventDetail {
     eventPic: string;
 }
 
+export interface UserDetail {
+    id: number;
+    firstName: string;
+    lastName: string;
+    email: string;
+    tel: string;
+    profilePic: string;
+}
+
 export default client;

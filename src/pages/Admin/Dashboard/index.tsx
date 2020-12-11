@@ -1,5 +1,6 @@
 import API, { EventDetail } from 'API';
 import { useState, useEffect } from 'react';
+import Swal from 'sweetalert2';
 
 const AdminDashboard = () => {
     const [eventList, setEventList] = useState<EventDetail[]>([]);
@@ -10,6 +11,30 @@ const AdminDashboard = () => {
             })
             .catch((_e) => setEventList([]));
     }, []);
+
+    const confirmDelete = (eventId: number) => {
+        Swal.fire({
+            title: 'ต้องการลบหรือไม่?',
+            text: 'การลบนี้จะไม่สามารถกู้คืนข้อมูลกลับได้',
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonText: 'ลบ',
+            cancelButtonText: 'ยกเลิก',
+            customClass: {
+                confirmButton: 'btn',
+                cancelButton: 'btn btn-primary'
+            },
+            confirmButtonColor: '#fff',
+            cancelButtonColor: '#FE604A'
+        }).then((result) => {
+            // delete
+
+            // show complete status
+            if (result.isConfirmed) {
+                Swal.fire('', 'อีเวนท์ถูกลบแล้ว', 'success');
+            }
+        });
+    };
 
     return (
         <div className='container'>
@@ -41,7 +66,10 @@ const AdminDashboard = () => {
                                     <button className='btn mr-5' type='button'>
                                         <i className='fas fa-edit'></i> แก้ไข
                                     </button>
-                                    <button className='btn' type='button'>
+                                    <button
+                                        className='btn'
+                                        type='button'
+                                        onClick={() => confirmDelete(e.id)}>
                                         <i className='fas fa-trash'></i> ลบ
                                     </button>
                                 </td>
