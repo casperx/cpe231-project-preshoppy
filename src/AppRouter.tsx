@@ -6,7 +6,6 @@ import ProfileImage from 'assets/prof.jpg';
 import NotFound from 'pages/NotFound';
 import Home from 'pages/Home';
 import Event from 'pages/Event';
-import EventDescription from 'pages/Event/_description';
 import Register from 'pages/Register';
 import Login from 'pages/Login';
 import Profile from 'pages/User/Profile';
@@ -14,7 +13,6 @@ import Profile from 'pages/User/Profile';
 const pages = [
     { name: 'หน้าหลัก', path: '/', Component: Home, displayed: true },
     { name: 'อีเวนท์', path: '/event', Component: Event, displayed: true },
-    { name: 'รายละเอียดอีเวนท์', path: '/event/:event_id', Component: EventDescription },
     { name: 'สมัครสมาชิก', path: '/register', Component: Register },
     { name: 'เข้าสู่ระบบ', path: '/login', Component: Login },
     { name: 'โปรไฟล์', path: '/user/profile', Component: Profile }

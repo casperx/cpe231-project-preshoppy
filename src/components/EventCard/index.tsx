@@ -1,9 +1,9 @@
 import { EventDescription } from './styled';
 import { EventCardProps } from './typed';
 
-const EventCard = ({ posterImage, title, desc, date, location }: EventCardProps) => {
+const EventCard = ({ posterImage, title, desc, date, location, onClick }: EventCardProps) => {
     return (
-        <div className='card p-0 m-5'>
+        <div className='card p-0 m-5' onClick={onClick} style={{ cursor: 'pointer' }}>
             <img
                 src={posterImage}
                 className='img-fluid rounded-top'
@@ -17,23 +17,13 @@ const EventCard = ({ posterImage, title, desc, date, location }: EventCardProps)
             <div className='content'>
                 <h2 className='content-title mb-0 text-truncate'>{title}</h2>
                 <EventDescription>{desc}</EventDescription>
-                <div>
-                    <table>
-                        <tbody>
-                            <tr>
-                                <td>
-                                    <i className='fas fa-calendar mr-5'></i>
-                                </td>
-                                <td className='text-truncate'>{date}</td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <i className='fas fa-map-marker-alt mr-5'></i>
-                                </td>
-                                <td className='text-truncate'>{location}</td>
-                            </tr>
-                        </tbody>
-                    </table>
+                <div className='d-flex'>
+                    <i className='fas fa-calendar mr-5'></i>
+                    <div className='text-truncate'>{date}</div>
+                </div>
+                <div className='d-flex'>
+                    <i className='fas fa-map-marker-alt mr-5'></i>
+                    <div className='text-truncate'>{location}</div>
                 </div>
             </div>
         </div>

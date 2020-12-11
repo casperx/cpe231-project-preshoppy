@@ -4,4 +4,5 @@ export interface EventCardProps {
     desc: string;
     date: string;
     location: string;
+    onClick: () => void;
 }

@@ -111,6 +111,8 @@ export const GlobalStyle = createGlobalStyle`
         --heading-font-weight: 700;
         --content-and-card-spacing: 1rem;
         --content-title-font-weight: 700;
+        --modal-content-width: 80rem;
+        --modal-title-font-size: 3rem;
     }
 
     .nav-link:hover,
@@ -135,6 +137,10 @@ export const GlobalStyle = createGlobalStyle`
         text-decoration: underline;
     }
 
+    .content-wrapper {
+        padding-bottom: 2rem;
+    }
+
     .content-wrapper>.container {
         min-height: calc(100vh - var(--navbar-height));
     }
@@ -156,5 +162,18 @@ export const GlobalStyle = createGlobalStyle`
             padding-left: calc((100% - var(--container-xl-max-width)) / 2);
             padding-right: calc((100% - var(--container-xl-max-width)) / 2);
         }
+    }
+
+    .ReactModal__Overlay {
+        opacity: 0;
+        transition: opacity .5s;
+    }
+
+    .ReactModal__Overlay--after-open{
+        opacity: 1;
+    }
+
+    .ReactModal__Overlay--before-close{
+        opacity: 0;
     }
 `;
