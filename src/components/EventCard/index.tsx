@@ -16,7 +16,7 @@ const EventCard = ({ posterImage, title, desc, date, location, onClick }: EventC
             />
             <div className='content'>
                 <h2 className='content-title mb-0 text-truncate'>{title}</h2>
-                <EventDescription>{desc}</EventDescription>
+                <EventDescription dangerouslySetInnerHTML={{ __html: desc }}></EventDescription>
                 <div className='d-flex'>
                     <i className='fas fa-calendar mr-5'></i>
                     <div className='text-truncate'>{date}</div>

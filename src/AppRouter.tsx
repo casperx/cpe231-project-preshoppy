@@ -11,6 +11,7 @@ import Login from 'pages/Login';
 import Profile from 'pages/User/Profile';
 import Admin from 'pages/Admin';
 import AdminDashboard from 'pages/Admin/Dashboard';
+import AdminCreateEvent from 'pages/Admin/Dashboard/create_event';
 import AdminEditEvent from 'pages/Admin/Dashboard/edit_event';
 
 const pages = [
@@ -21,7 +22,8 @@ const pages = [
     { name: 'โปรไฟล์', path: '/user/profile', Component: Profile },
     { name: 'ล็อกอินหลังบ้าน', path: '/admin', Component: Admin },
     { name: 'หลังบ้าน', path: '/admin/dashboard', Component: AdminDashboard },
-    { name: 'แก้อีเวนท์', path: '/admin/dashboard/event/edit', Component: AdminEditEvent }
+    { name: 'เพิ่มอีเวนท์', path: '/admin/dashboard/event/add', Component: AdminCreateEvent },
+    { name: 'แก้อีเวนท์', path: '/admin/dashboard/event/edit/:id', Component: AdminEditEvent },
 ];
 
 const NavItem = ({
