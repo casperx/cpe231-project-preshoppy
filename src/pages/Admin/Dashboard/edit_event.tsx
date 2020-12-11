@@ -15,68 +15,88 @@ const EditEvent = () => {
 
         return 'not-handled';
     };
+    const editorButtonClick = (type: string) => {
+        editorChange(RichUtils.toggleInlineStyle(editorState, type));
+    };
 
     return (
         <div className='container'>
             <h1>แก้ไขอีเวนท์</h1>
             <div className='card'>
+                <div className='form-group'>
+                    <label htmlFor='event_name' className='required'>
+                        ชื่ออีเวนท์
+                    </label>
+                    <input type='text' className='form-control' id='event_name' required />
+                </div>
                 <div className='row'>
                     <div className='col mr-10 form-group'>
-                        <label htmlFor='full-name' className='required'>
-                            Full name
-                        </label>
-                        <input
-                            type='text'
-                            className='form-control'
-                            id='full-name'
-                            placeholder='Full name'
-                            required
-                        />
+                        <label className='required'>ภาพโปสเตอร์</label>
+                        <div className='custom-file'>
+                            <input type='file' id='event_poster' />
+                            <label htmlFor='event_poster' style={{ width: '100%' }}>
+                                เลือกไฟล์
+                            </label>
+                        </div>
                     </div>
                     <div className='col mr-10 form-group'>
                         <label htmlFor='event_location' className='required'>
-                            event_location
+                            สถานที่
                         </label>
-                        <input
-                            type='text'
-                            className='form-control'
-                            id='full-name'
-                            placeholder='Full name'
-                            required
-                        />
+                        <input type='text' className='form-control' id='event_location' required />
                     </div>
                     <div className='col mr-10 form-group'>
-                        <label htmlFor='full-name' className='required'>
-                            Full name
+                        <label htmlFor='event_startDate' className='required'>
+                            วันเริ่มต้น
                         </label>
-                        <input
-                            type='text'
-                            className='form-control'
-                            id='full-name'
-                            placeholder='Full name'
-                            required
-                        />
+                        <input type='date' className='form-control' id='event_startDate' required />
                     </div>
                     <div className='col form-group'>
-                        <label htmlFor='full-name' className='required'>
-                            Full name
+                        <label htmlFor='event_endDate' className='required'>
+                            วันสิ้นสุด
                         </label>
-                        <input
-                            type='text'
-                            className='form-control'
-                            id='full-name'
-                            placeholder='Full name'
-                            required
-                        />
+                        <input type='date' className='form-control' id='event_endDate' required />
                     </div>
                 </div>
+                <section className='d-flex'>
+                    <section>
+                        <button
+                            className='btn mr-5'
+                            type='button'
+                            onClick={() => editorButtonClick('BOLD')}>
+                            <i className='fas fa-bold'></i>
+                        </button>
+                        <button
+                            className='btn mr-5'
+                            type='button'
+                            onClick={() => editorButtonClick('ITALIC')}>
+                            <i className='fas fa-italic'></i>
+                        </button>
+                        <button
+                            className='btn mr-5'
+                            type='button'
+                            onClick={() => editorButtonClick('UNDERLINE')}>
+                            <i className='fas fa-underline'></i>
+                        </button>
+                        <button
+                            className='btn'
+                            type='button'
+                            onClick={() => editorButtonClick('CODE')}>
+                            <i className='fas fa-code'></i>
+                        </button>
+                    </section>
+                    <section className='ml-auto'>
+                        <button className='btn btn-primary'>บันทึก</button>
+                    </section>
+                </section>
+                <div className='card mx-0'>
+                    <Editor
+                        editorState={editorState}
+                        handleKeyCommand={handleKeyCommand}
+                        onChange={editorChange}
+                    />
+                </div>
             </div>
-
-            <Editor
-                editorState={editorState}
-                handleKeyCommand={handleKeyCommand}
-                onChange={editorChange}
-            />
         </div>
     );
 };
