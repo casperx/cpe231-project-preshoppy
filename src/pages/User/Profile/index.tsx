@@ -2,6 +2,7 @@ import { useState, ChangeEvent, useEffect, useMemo, FormEvent } from 'react';
 import API, { baseURL as APIBaseURL, UserDetail } from 'API';
 import PasswordStrengthBar from 'react-password-strength-bar';
 import Swal from 'sweetalert2';
+import { Link } from 'react-router-dom';
 
 const passwordCheckerWords = {
     scoreWords: [
@@ -121,12 +122,12 @@ const Profile = () => {
                                 width: '100%',
                                 minWidth: '100%'
                             }}>
-                            <a href='#' className='dropdown-item'>
+                            <Link to='/user/profile' className='dropdown-item'>
                                 บัญชีของฉัน
-                            </a>
-                            <a href='#' className='dropdown-item'>
+                            </Link>
+                            <Link to='/user/order' className='dropdown-item'>
                                 การซื้อของฉัน
-                            </a>
+                            </Link>
                         </div>
                     </div>
                 </div>
