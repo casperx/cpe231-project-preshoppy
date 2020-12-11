@@ -77,7 +77,10 @@ const AdminDashboard = () => {
                                         }>
                                         <i className='fas fa-edit'></i> แก้ไข
                                     </button>
-                                    <button className='btn' type='button'>
+                                    <button
+                                        className='btn'
+                                        type='button'
+                                        onClick={() => confirmDelete(e.id)}>
                                         <i className='fas fa-trash'></i> ลบ
                                     </button>
                                 </td>

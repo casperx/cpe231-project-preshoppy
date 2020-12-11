@@ -1,6 +1,6 @@
 import { BrowserRouter as Router, Link, Switch, Route, NavLink } from 'react-router-dom';
 import Logo from 'assets/logo.svg';
-import ProfileImage from 'assets/prof.jpg';
+import API, { baseURL as APIBaseURL, UserDetail } from 'API';
 
 // Pages
 import NotFound from 'pages/NotFound';
@@ -13,6 +13,8 @@ import Admin from 'pages/Admin';
 import AdminDashboard from 'pages/Admin/Dashboard';
 import AdminCreateEvent from 'pages/Admin/Dashboard/create_event';
 import AdminEditEvent from 'pages/Admin/Dashboard/edit_event';
+import Chat from 'pages/Chat';
+import { useEffect, useState } from 'react';
 
 const pages = [
     { name: 'หน้าหลัก', path: '/', Component: Home, displayed: true },
@@ -23,7 +25,8 @@ const pages = [
     { name: 'ล็อกอินหลังบ้าน', path: '/admin', Component: Admin },
     { name: 'หลังบ้าน', path: '/admin/dashboard', Component: AdminDashboard },
     { name: 'เพิ่มอีเวนท์', path: '/admin/dashboard/event/add', Component: AdminCreateEvent },
-    { name: 'แก้อีเวนท์', path: '/admin/dashboard/event/edit/:id', Component: AdminEditEvent }
+    { name: 'แก้อีเวนท์', path: '/admin/dashboard/event/edit/:id', Component: AdminEditEvent },
+    { name: 'แชท', path: '/chat', Component: Chat }
 ];
 
 const NavItem = ({
@@ -43,6 +46,15 @@ const NavItem = ({
 );
 
 const AppRouter = () => {
+    const [pictureUrl, setPictureUrl] = useState('');
+
+    useEffect(() => {
+        API.get('/user/info/1').then((res) => {
+            const detail = res.data as UserDetail;
+            setPictureUrl(detail.profilePic);
+        });
+    }, []);
+
     return (
         <Router>
             <div className='page-wrapper with-navbar'>
@@ -79,7 +91,7 @@ const AppRouter = () => {
                                     aria-haspopup='true'
                                     aria-expanded='false'>
                                     <img
-                                        src={ProfileImage}
+                                        src={`${APIBaseURL}/upload/profile_pic/${pictureUrl}`}
                                         className='rounded-circle'
                                         alt='Profile'
                                         style={{

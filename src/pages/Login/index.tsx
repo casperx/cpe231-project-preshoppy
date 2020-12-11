@@ -3,8 +3,21 @@ import { Link, useHistory } from 'react-router-dom';
 import API from 'API';
 import ManImage from 'assets/man.png';
 import { hideBackground, showBackground } from 'helpers/background';
+import Swal from 'sweetalert2';
 
 const Login = () => {
+    const cannotLogin = () => {
+        Swal.fire({
+            title: 'ไม่สามารถล็อกอินได้',
+            text: 'อีเมลหรือรหัสผ่านของท่านผิด กรุณาลองใหม่',
+            icon: 'warning',
+            customClass: {
+                confirmButton: 'btn btn-primary'
+            },
+            confirmButtonColor: '#FE604A'
+        });
+    };
+
     useEffect(() => {
         showBackground();
         return () => hideBackground();
