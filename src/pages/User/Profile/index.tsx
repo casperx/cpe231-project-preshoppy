@@ -1,8 +1,7 @@
 import { useState, ChangeEvent, useEffect, useMemo, FormEvent } from 'react';
 import API, { baseURL as APIBaseURL, UserDetail } from 'API';
 import PasswordStrengthBar from 'react-password-strength-bar';
-import ProfileImage from 'assets/prof.jpg';
-import { formatWithCursor } from 'prettier';
+import Swal from 'sweetalert2';
 
 const passwordCheckerWords = {
     scoreWords: [
@@ -66,6 +65,8 @@ const Profile = () => {
         return 'รหัสผ่านตรงกัน 😎';
     }, [password, confirmPassword]);
 
+    const [pictureUrl, setPictureUrl] = useState('');
+
     useEffect(() => {
         API.get('/user/info/1').then((res) => {
             const detail = res.data as UserDetail;
@@ -73,6 +74,7 @@ const Profile = () => {
             setFirstName(detail.firstName);
             setLastName(detail.lastName);
             setTel(detail.tel);
+            setPictureUrl(detail.profilePic);
         });
     }, []);
 
@@ -92,10 +94,12 @@ const Profile = () => {
             }
         })
             .then((res) => {
-                alert('OK');
+                Swal.fire('แก้ไขสำเร็จ', 'ข้อมูลของท่านถูกแก้ไขแล้ว', 'success').then(() =>
+                    location.reload()
+                );
             })
             .catch((e) => {
-                alert('Something went wrong');
+                Swal.fire('เกิดข้อผิดพลาด', 'เกิดข้อผิดพลาด กรุณาลองใหม่', 'error');
             });
     };
 
@@ -105,7 +109,7 @@ const Profile = () => {
                 <div className='col-12 col-md-3 p-20'>
                     <img
                         className='d-block img-fluid rounded-circle'
-                        src={ProfileImage}
+                        src={`${APIBaseURL}/upload/profile_pic/${pictureUrl}`}
                         alt='profile'
                     />
                     <div className='dropdown show d-block mt-20'>
