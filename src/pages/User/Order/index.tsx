@@ -17,7 +17,20 @@ const Order = () => {
         setIsModalOpen(true);
     };
     const hideEventModal = () => setIsModalOpen(false);
-    const [currentOrder, setCurrentOrder] = useState<OrderItem[]>([]);
+    const [currentOrder, setCurrentOrder] = useState<OrderItem[]>([
+        {
+            name: 'BITCOIN 101',
+            price: 117,
+            quantity: 1,
+            description: ''
+        },
+        {
+            name: 'FlashExpress',
+            price: 35,
+            quantity: 1,
+            description: ''
+        }
+    ]);
 
     const [pictureUrl, setPictureUrl] = useState('');
     useEffect(() => {
@@ -26,6 +39,23 @@ const Order = () => {
             setPictureUrl(detail.profilePic);
         });
     }, []);
+
+    const confirmItemArrived = () => {
+        Swal.fire({
+            title: 'ต้องการยืนยันหรือไม่?',
+            text: 'เมื่อยืนยันสินค้าแล้วผู้ขายจะได้รับเงินของท่าน',
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonText: 'ยืนยัน',
+            cancelButtonText: 'ยกเลิก',
+            customClass: {
+                confirmButton: 'btn btn-primary',
+                cancelButton: 'btn'
+            },
+            confirmButtonColor: '#FE604A',
+            cancelButtonColor: '#fff'
+        });
+    };
 
     const enterTrackingNumber = () => {
         Swal.fire({
@@ -98,7 +128,7 @@ const Order = () => {
                                 <h2 className='m-0'>Order ID: #231726817648971</h2>
                             </div>
                             <div className='col-auto'>
-                                <h2 className='m-0 text-primary'>999฿</h2>
+                                <h2 className='m-0 text-primary'>152฿</h2>
                             </div>
                         </div>
                         <p>
@@ -116,6 +146,9 @@ const Order = () => {
                             <Link to='/chat' className='btn mr-5'>
                                 แชทกับผู้ขาย
                             </Link>
+                            <button className='btn mr-5' onClick={confirmItemArrived}>
+                                ยืนยันรับสินค้า
+                            </button>
                             <button className='btn' onClick={showEventModal}>
                                 ดูข้อมูล
                             </button>
@@ -175,12 +208,6 @@ const Order = () => {
                                 </tr>
                             </tfoot>
                         </table>
-                    </div>
-                    <hr />
-                    <div className='text-right'>
-                        <button className='btn btn-primary' type='button'>
-                            ส่งออร์เดอร์
-                        </button>
                     </div>
                 </div>
             </ReactModal>

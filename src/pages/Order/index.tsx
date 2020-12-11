@@ -8,7 +8,20 @@ interface OrderItem {
 }
 
 const Order = () => {
-    const [currentOrder, setCurrentOrder] = useState<OrderItem[]>([]);
+    const [currentOrder, setCurrentOrder] = useState<OrderItem[]>([
+        {
+            name: 'BITCOIN 101',
+            price: 117,
+            quantity: 1,
+            description: ''
+        },
+        {
+            name: 'FlashExpress',
+            price: 35,
+            quantity: 1,
+            description: ''
+        }
+    ]);
 
     const alertFinish = () => Swal.fire('การสั่งซื้อสำเร็จ!', undefined, 'success');
 
