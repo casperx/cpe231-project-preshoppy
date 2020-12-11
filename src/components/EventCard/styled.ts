@@ -5,4 +5,8 @@ export const EventDescription = styled.p`
     -webkit-line-clamp: 3;
     -webkit-box-orient: vertical;
     overflow: hidden;
+
+    p {
+        margin: 0;
+    }
 `;

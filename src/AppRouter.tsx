@@ -9,6 +9,7 @@ import Event from 'pages/Event';
 import Register from 'pages/Register';
 import Login from 'pages/Login';
 import Profile from 'pages/User/Profile';
+import Order from 'pages/User/Order';
 import Admin from 'pages/Admin';
 import AdminDashboard from 'pages/Admin/Dashboard';
 import AdminCreateEvent from 'pages/Admin/Dashboard/create_event';
@@ -22,6 +23,7 @@ const pages = [
     { name: 'สมัครสมาชิก', path: '/register', Component: Register },
     { name: 'เข้าสู่ระบบ', path: '/login', Component: Login },
     { name: 'โปรไฟล์', path: '/user/profile', Component: Profile },
+    { name: 'ออร์เดอร์', path: '/user/order', Component: Order },
     { name: 'ล็อกอินหลังบ้าน', path: '/admin', Component: Admin },
     { name: 'หลังบ้าน', path: '/admin/dashboard', Component: AdminDashboard },
     { name: 'เพิ่มอีเวนท์', path: '/admin/dashboard/event/add', Component: AdminCreateEvent },
@@ -107,7 +109,7 @@ const AppRouter = () => {
                                     <Link to='/user/profile' className='dropdown-item'>
                                         บัญชีของฉัน
                                     </Link>
-                                    <Link to='/user/transactions' className='dropdown-item'>
+                                    <Link to='/user/order' className='dropdown-item'>
                                         การซื้อของฉัน
                                     </Link>
                                     <div className='dropdown-divider'></div>
@@ -160,7 +162,7 @@ const AppRouter = () => {
                                 <Link to='/user/profile' className='dropdown-item'>
                                     บัญชีของฉัน
                                 </Link>
-                                <Link to='/user/transactions' className='dropdown-item'>
+                                <Link to='/user/order' className='dropdown-item'>
                                     การซื้อของฉัน
                                 </Link>
                                 <div className='dropdown-divider'></div>
